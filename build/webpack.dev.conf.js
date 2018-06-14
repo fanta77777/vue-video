@@ -1,3 +1,4 @@
+//开发配置
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
@@ -11,6 +12,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
+//webpack-merge这个模块可以起到合并配置的作用。
 module.exports = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })

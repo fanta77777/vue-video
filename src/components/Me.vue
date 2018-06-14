@@ -3,30 +3,30 @@
         
         <section class="me_deatil" @click="showDefaultName">
             <section class="avator">
-            <template v-if="avator == ''">
-                <input @click="upload" id="upload" type="file">
-                <div class="avator_border">上传头像</div>
-            </template>
-            <template v-else>
-                <input @click="upload" id="upload" type="file">
-                <div class="avator_border">
-                    <img v-lazy="baseUrl+'/avator/'+ avator +'.png' " alt="">
-                </div>
-            </template>
-            <div class="name" @click.stop="editUserName">
-                <template v-if="defaultName">
-                    {{ userName }} <i class="iconfont icon-bianji"></i>
+                <template v-if="avator == ''">
+                    <input @click="upload" id="upload" type="file">
+                    <div class="avator_border">上传头像</div>
                 </template>
                 <template v-else>
-                    <input type="text" v-focus v-model="userNameModel" @keyup.enter="submitEditName" >
-                    <i class="iconfont icon-submit"  @click.stop="submitEditName" ></i>
+                    <input @click="upload" id="upload" type="file">
+                    <div class="avator_border">
+                        <img v-lazy="baseUrl+'/avator/'+ avator +'.png' " alt="">
+                    </div>
                 </template>
-            </div>
-            <div @click="logout" class="logout">
-               <i class="iconfont icon-logout23"></i>
-               退出
-            </div>
-        </section>
+                <div class="name" @click.stop="editUserName">
+                    <template v-if="defaultName">
+                        {{ userName }} <i class="iconfont icon-bianji"></i>
+                    </template>
+                    <template v-else>
+                        <input type="text" v-focus v-model="userNameModel" @keyup.enter="submitEditName" >
+                        <i class="iconfont icon-submit"  @click.stop="submitEditName" ></i>
+                    </template>
+                </div>
+                <div @click="logout" class="logout">
+                <i class="iconfont icon-logout23"></i>
+                退出
+                </div>
+            </section>
         <Loading :loading="loading" />
         <section class="like_list list">
             <h3>
@@ -280,16 +280,10 @@ export default {
                         this.value = '';
                         return;
                     };
-                    // if (file.size >= 1024*1024/2) {
-                    //     _that.$toast({
-                    //         icon:'fail',
-                    //         message:'超过512Kb了哟!'
-                    //     }) 
-                    //     return
-                    // }
                     reader.onload = function(e) {
                         this.value = '';
                         var image = new Image();
+                        console.log(image,123);
                         image.onload = function(){
                             var canvas = document.createElement('canvas');
                             var ctx = canvas.getContext("2d");

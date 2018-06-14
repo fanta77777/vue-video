@@ -128,8 +128,7 @@ import {
   getVideoComment,
   getInitVideoLikeData,
   postVideoLikeData,
-  reportComment,
-  checkUser
+  reportComment
 } from "../data/fetchData.js";
 
 export default {
@@ -189,7 +188,6 @@ export default {
   methods: {
     async initData() {
       this.loading = true;
-      console.log(this.loading);
       // 获取video数据
       var routerId = this.$route.params.id;
       var userName = this.userName;
@@ -199,7 +197,6 @@ export default {
       await singleVideoData(routerId)
         .then(res => {
           var data = res.data;
-          console.log(data[0], "lists");
           if (data[0].length == 0) {
             this.$toast({
               icon: "fail",
@@ -212,6 +209,7 @@ export default {
           this.lists = data[0][0];
           // 喜欢的数量
           var likeLength = data[1][0]["count(*)"];
+          console.log(data, 1332);
           // 该video总的评价数量
           var likeTotalLength = data[2][0]["count(*)"];
           this.likeTotalLength = likeTotalLength;
@@ -240,9 +238,11 @@ export default {
             message: e.message
           });
         });
+
       setTimeout(() => {
         this.loading = false;
       }, 500);
+
       if (userName !== "" || !userName) {
         // 获取like参数
         await getInitVideoLikeData(routerId, userName)
@@ -398,6 +398,7 @@ export default {
     },
     goPage(page) {
       this.page = page;
+      console.log(this.pageNeedComments, 123);
       this.comments = this.pageNeedComments.slice((page - 1) * 5, page * 5);
     },
     likeNeedLogin() {

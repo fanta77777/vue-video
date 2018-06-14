@@ -12,31 +12,27 @@
 </template>
 
 <script>
-
 export default {
-    name: 'vfooter',
-    props:['loading'],
-    data () {
-        return {
-            // msg: ''
-        }
-    },
-     directives: {
-        move: {
-            inserted(el){
-                document.body.appendChild(el)
-            },
-            unbind(el){
-                document.body.removeChild(el)
-                
-            }
-        }
-    },
-}
+  name: "vfooter",
+  props: ["loading"],
+  data() {
+    return {
+      // msg: ''
+    };
+  },
+  directives: {
+    move: {
+      inserted(el) {
+        document.body.appendChild(el);
+      },
+      unbind(el) {
+        document.body.removeChild(el);
+      }
+    }
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-
-
 </style>

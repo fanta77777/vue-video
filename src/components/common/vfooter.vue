@@ -8,6 +8,7 @@
             <i class="iconfont icon-my1"></i>
             <span>我</span>
         </router-link>
+      
     </section>
 </template>
 
