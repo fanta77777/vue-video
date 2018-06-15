@@ -398,7 +398,6 @@ export default {
     },
     goPage(page) {
       this.page = page;
-      console.log(this.pageNeedComments, 123);
       this.comments = this.pageNeedComments.slice((page - 1) * 5, page * 5);
     },
     likeNeedLogin() {

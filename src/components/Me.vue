@@ -283,7 +283,6 @@ export default {
                     reader.onload = function(e) {
                         this.value = '';
                         var image = new Image();
-                        console.log(image,123);
                         image.onload = function(){
                             var canvas = document.createElement('canvas');
                             var ctx = canvas.getContext("2d");

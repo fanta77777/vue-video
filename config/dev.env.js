@@ -1,3 +1,5 @@
+// 设置环境变量
+
 var merge = require('webpack-merge')
 var prodEnv = require('./prod.env')
 
