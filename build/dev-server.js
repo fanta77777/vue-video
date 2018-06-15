@@ -62,6 +62,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 
 // force page reload when html-webpack-plugin template changes
 //当html-webpack-plugin模板更改时强制页面重新加载
+
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
     hotMiddleware.publish({ action: 'reload' })
@@ -106,6 +107,17 @@ app.use(staticPath, express.static('./static'))
 var uri = 'http://localhost:' + port
 
 
+// 一般我们写一个promise，都是这样
+
+// var promise = new Promise( resolve => {
+//     // 这里写一大堆代码
+//     resolve()
+// } );
+
+// 这样就要在promise中包一大堆代码
+// 如果把resolve赋值给一个外部变量_resolve，我就可以把需要写在promise构造函数中的代码写到外面了，只要完成时调用一下_resolve就行了
+
+
 // 创建promise，在应用服务启动之后resolve
 // 便于外部文件require了这个dev-server之后的代码编写
 var _resolve
@@ -113,7 +125,10 @@ var readyPromise = new Promise(resolve => {
   _resolve = resolve
 })
 
+
 console.log('> Starting dev server...')
+// webpack-dev-middleware等待webpack完成所有编译打包之后输出提示语到控制台，表明服务正式启动
+// 服务正式启动才自动打开浏览器进入页面
 devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')
   // when env is testing, don't need open it
@@ -125,8 +140,13 @@ devMiddleware.waitUntilValid(() => {
   _resolve()
 })
 
+// 启动express服务器并监听相应的端口
 var server = app.listen(port)
 
+// 暴露本模块的功能给外部使用，例如下面这种用法
+// var devServer = require('./build/dev-server')
+// devServer.ready.then(() => {...})
+// if (...) { devServer.close() }
 module.exports = {
   ready: readyPromise,
   close: () => {
